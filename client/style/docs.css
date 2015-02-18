@@ -55,3 +55,7 @@
   min-height: 100vw;
   background-image: url('../assets/witewall_3.png');
 }
+
+.docs img {
+  width: 100%;
+}
