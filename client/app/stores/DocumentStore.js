@@ -40,11 +40,11 @@ var DocumentStore = objectAssign({} , EventEmitter.prototype, {
   getDoc: function (section, doc) {
     if (doc) {
       doc = '/'+doc;
-    }
-    else {
+    } else {
       doc = '';
     }
-    if (section === 'README'){
+
+    if (section === 'README') {
       $.ajax({
         url: 'https://api.github.com/repos/TuxedoJS/TuxedoJS/contents/' + section +'.md?client_id=' + process.env.GITHUB_CLIENT_ID + 'client_secret=' + process.env.GITHUB_SECRET_ID,
         withCredentials: false,
@@ -56,7 +56,6 @@ var DocumentStore = objectAssign({} , EventEmitter.prototype, {
         }.bind(this)
       });
     } else {
-
       $.ajax({
         url: 'https://api.github.com/repos/TuxedoJS/TuxedoJS/contents/docs/' + section + doc +'.md?client_id=' + process.env.GITHUB_CLIENT_ID + 'client_secret=' + process.env.GITHUB_SECRET_ID,
         withCredentials: false,
@@ -65,16 +64,21 @@ var DocumentStore = objectAssign({} , EventEmitter.prototype, {
           if (doc) {
             var input = body.content.replace(/\s/g, '');
             this._docs[section][doc] = window.atob(input);
-          }
-          else {
+          } else {
             var input = body.content.replace(/\s/g, '');
-            this._docs[section] = window.atob(input);
+            var content = window.atob(input);
+            if (body.name === 'TuxxAnimations.md') {
+              content = content.replace(/\!\[Easings\]\(http\:\/\/\i\.imgur\.com\/2XAGQgq\.png \"Easings\"\)/, '<img src="http://i.imgur.com/2XAGQgq.png" class="easings" alt="TuxedoJS easing diagrams" />');
+            }
+
+            this._docs[section] = content;
           }
           this.emitChange();
         }.bind(this)
       });
     }
   },
+
   emitChange: function () {
     this.emit(CHANGE_EVENT);
   },
@@ -86,12 +90,12 @@ var DocumentStore = objectAssign({} , EventEmitter.prototype, {
   removeChangeListener: function (callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }
-
-});//End store
+});
 
 AppDispatcher.register(function (payload) {
   var action = payload.action;
   var body = action.body;
+
   switch (action.actionType) {
     case DocumentConstants.DOCUMENT_GET:
       DocumentStore.getAll();
@@ -105,4 +109,3 @@ AppDispatcher.register(function (payload) {
 });
 
 module.exports = DocumentStore;
-

@@ -2,10 +2,10 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
-var ReactBootstrap = require('react-bootstrap'),
-    Col = ReactBootstrap.Col,
-    Row = ReactBootstrap.Row,
-    Grid = ReactBootstrap.Grid;
+var ReactBootstrap = require('react-bootstrap');
+var Col = ReactBootstrap.Col;
+var Row = ReactBootstrap.Row;
+var Grid = ReactBootstrap.Grid;
 var DocumentStore = require('../stores/DocumentStore');
 var DocumentActions = require('../actions/DocumentActions');
 
@@ -16,12 +16,14 @@ var TheTeamView = React.createClass({
       spinner: false
     };
   },
+
   listenerCallback: function () {
     this.setState({
       contributing: DocumentStore.getSingleDoc('CONTRIBUTING'),
       spinner: false
     });
   },
+
   componentDidMount: function () {
     DocumentStore.addChangeListener(this.listenerCallback);
     DocumentActions.getDoc('CONTRIBUTING');
@@ -29,9 +31,11 @@ var TheTeamView = React.createClass({
       this.setState({spinner: true});
     }
   },
+
   componentWillUnmount: function () {
     DocumentStore.removeChangeListener(this.listenerCallback);
   },
+
   render: function () {
     return (
       <div>
@@ -39,12 +43,12 @@ var TheTeamView = React.createClass({
         <Grid className="grid">
           <Row className="the-team">
             <h1 className="team">The TuxedoJS Team</h1>
-            <br/>
+            <br />
             <Col className="profile" md={3} xsoffset={2}>
               <a href="https://github.com/sjstebbins">
                 <img className="team-profiles" src="https://avatars2.githubusercontent.com/u/455819?v=3&s=460" />
                 <h3 className="team-names">Spencer Stebbins <i className="fa fa-github-square"></i></h3>
-                <h4 className="team-names">Product Manager & UI / Animation Assasin</h4>
+                <h4 className="team-names">Product Manager & UI / Animation Assassin</h4>
               </a>
             </Col>
             <Col className="profile" md={3} xsoffset={2}>

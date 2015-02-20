@@ -13,4 +13,3 @@ var AppDispatcher = objectAssign(new Flux.Dispatcher(), {
 });
 
 module.exports = AppDispatcher;
-

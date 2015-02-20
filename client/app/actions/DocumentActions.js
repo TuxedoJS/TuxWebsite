@@ -18,4 +18,3 @@ var DocumentActions = {
 };
 
 module.exports = DocumentActions;
-

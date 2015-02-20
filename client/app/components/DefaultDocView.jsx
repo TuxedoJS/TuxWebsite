@@ -1,7 +1,6 @@
 var React = require('react');
 
 var DefaultDocView = React.createClass({
-
   render: function () {
     return (
       <div className="defaultDoc">
