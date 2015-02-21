@@ -9,6 +9,7 @@ var DefaultRoute = Router.DefaultRoute;
 var DefaultWelcome = require('./app/components/DefaultWelcome.jsx');
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
+var Redirect = Router.Redirect;
 var NotFound = require('./app/components/NotFound.jsx');
 var GettingStartedView = require('./app/components/GettingStartedView.jsx');
 var DocsView = require('./app/components/docs/DocsView.jsx');
@@ -17,6 +18,7 @@ var SectionHandler = require('./app/components/docs/sections/SectionHandler.jsx'
 var TheTeamView = require('./app/components/TheTeamView.jsx');
 var DefaultDocView = require('./app/components/DefaultDocView.jsx');
 var OverviewView = require('./app/components/OverviewView.jsx');
+var ContributingView = require('./app/components/ContributingView.jsx');
 
 var routes = (
   <Route name="home" path="/" handler={NavView}>
@@ -30,6 +32,8 @@ var routes = (
     <Route name="getting-started" path="/getting-started" handler={GettingStartedView} />
     <Route name="overview" path="/overview" handler={OverviewView} />
     <Route name="contributors" path="/contributors" handler={TheTeamView} />
+    <Route name="contributing" path="/contributing" handler={ContributingView} />
+    <Redirect from="/CONTRIBUTING.md" to="contributing" />
     <NotFoundRoute handler={NotFound} />
   </Route>
 );

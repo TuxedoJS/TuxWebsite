@@ -44,7 +44,7 @@ var DocumentStore = objectAssign({} , EventEmitter.prototype, {
       doc = '';
     }
 
-    if (section === 'README') {
+    if (section === 'README' || section === 'CONTRIBUTING') {
       $.ajax({
         url: 'https://api.github.com/repos/TuxedoJS/TuxedoJS/contents/' + section +'.md?client_id=' + process.env.GITHUB_CLIENT_ID + 'client_secret=' + process.env.GITHUB_SECRET_ID,
         withCredentials: false,
